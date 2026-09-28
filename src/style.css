@@ -1,0 +1,304 @@
+/* browser resets */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.agro-hero {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.agro-hero__background {
+  position: absolute;
+  inset: 0;
+
+  background-image: url("https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  transform: scale(1.03);
+
+  z-index: -2;
+}
+
+.agro-hero__overlay {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 50% 48%,
+      rgba(0, 0, 0, 0.20) 0%,
+      rgba(0, 0, 0, 0.46) 58%,
+      rgba(0, 0, 0, 0.76) 100%);
+
+  z-index: -1;
+}
+
+.agro-hero__rings {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(circle at 50% 52%,
+      transparent 0 18%,
+      rgba(255, 255, 255, 0.08) 18.2% 18.4%,
+      transparent 18.6% 28%,
+      rgba(58, 170, 53, 0.08) 28.2% 28.4%,
+      transparent 28.6% 39%,
+      rgba(248, 170, 0, 0.06) 39.2% 39.4%,
+      transparent 39.6% 52%);
+
+  opacity: 0.65;
+
+  animation: agro-ring-breathe 9s ease-in-out infinite;
+}
+
+@keyframes agro-ring-breathe {
+
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+
+  50% {
+    transform: scale(1.035);
+    opacity: 0.75;
+  }
+}
+
+.agro-hero__content {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 24px;
+}
+
+.agro-hero__text {
+  text-align: center;
+  max-width: 900px;
+  margin-top: 18px;
+}
+
+.agro-hero__topics {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.28em;
+}
+
+.agro-hero__topics span:not(:last-child)::after {
+  content: "*";
+  margin-left: 10px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.agro-hero__eyebrow {
+  margin: 0 0 10px;
+
+  color: #3AAA35;
+
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+}
+
+.agro-hero__title {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: #FFFFFF;
+
+  line-height: 1.07;
+}
+
+.agro-hero__title-line {
+  display: block;
+}
+
+.agro-hero__title-line--main {
+  font-size: clamp(3.4rem, 5vw, 5.8rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.agro-hero__title-line--secondary {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 12px;
+  font-size: clamp(3rem, 4.7vw, 5.4rem);
+}
+
+.agro-hero__title-line--secondary strong {
+  background: #FFF;
+  background: linear-gradient(137deg, rgba(255, 255, 255, 1) 0%, rgba(58, 170, 53, 1) 88%, rgba(6, 126, 58, 1) 100%);
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.agro-hero__title-line--secondary em {
+  color: rgba(204, 204, 204, 0.726);
+  font-style: normal;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+}
+
+.agro-hero__subtitle {
+  margin: 16px auto 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+  line-height: 1.45;
+}
+
+.agro-hero__subtitle strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.agro-window {
+  position: relative;
+  width: min(1080px, 92vw);
+  aspect-ratio: 16/9;
+
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 24px;
+
+  background: rgba(2, 81, 39, 0.22);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.agro-window__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.agro-window__video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 112%;
+  height: 112%;
+
+  object-fit: cover;
+
+  transform: translate(-50%, -50%);
+}
+
+.agro-window__shade {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background:
+    linear-gradient(to top,
+      rgba(0, 0, 0, 0.72) 0%,
+      rgba(0, 0, 0, 0.34) 28%,
+      rgba(0, 0, 0, 0.08) 58%,
+      rgba(0, 0, 0, 0) 100%);
+
+  opacity: 1;
+  transition: 0.45s ease;
+}
+
+.agro-window:hover .agro-window__shade {
+  opacity: 0;
+}
+
+.agro-window__caption {
+  position: absolute;
+  left: 32px;
+  bottom: 28px;
+  z-index: 2;
+
+  max-width: 460px;
+
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.agro-window:hover .agro-window__caption {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.agro-window__caption span {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #3AAA35;
+
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+.agro-window__caption strong {
+  display: block;
+
+  color: #FFFFFF;
+  font-size: clamp(1.2rem, 2vw, 2.1rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.agro-window__media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.agro-window__video {
+  position: absolute;
+  inset: 0;
+}
+
+.agro-window__video video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 108%;
+  height: 108%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  display: block;
+}
