@@ -2,6 +2,7 @@
 body {
   margin: 0;
   padding: 0;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
 }
 
 .agro-hero {
@@ -87,6 +88,8 @@ body {
   justify-content: center;
 
   padding: 10px 24px;
+
+  perspective: 1400px;
 }
 
 .agro-hero__text {
@@ -145,7 +148,9 @@ body {
 .agro-hero__title-line--main {
   font-size: clamp(3.4rem, 5vw, 5.8rem);
   font-weight: 700;
-  letter-spacing: -0.015em;
+
+  letter-spacing: 0;
+  font-kerning: normal;
 }
 
 .agro-hero__title-line--secondary {
@@ -153,7 +158,10 @@ body {
   align-items: baseline;
   justify-content: center;
   gap: 12px;
+
   font-size: clamp(3rem, 4.7vw, 5.4rem);
+
+  margin-top: -0.18em;
 }
 
 .agro-hero__title-line--secondary strong {
@@ -203,6 +211,11 @@ body {
 
   box-shadow: 0 30px 70px rgba(0, 0, 0, 0.38),
     inset 0 1px 0 rgba(255, 255, 255, 0.12);
+
+  transform-style: preserve-3d;
+  transform-origin: center center;
+
+  will-change: transform;
 }
 
 .agro-window__media {
@@ -284,9 +297,66 @@ body {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 108%;
-  height: 108%;
+  width: 114%;
+  height: 114%;
   object-fit: cover;
   transform: translate(-50%, -50%);
   display: block;
+}
+
+/* left and right nav buttons */
+.agro-window__controls {
+  width: min(1180px, 96vw);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, 55%);
+
+  pointer-events: none;
+
+  z-index: 5;
+}
+
+.agro-window__control {
+  width: 54px;
+  height: 54px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  background: rgba(0, 0, 0, 0.28);
+
+  color: #FFFFFF;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 300;
+
+  backdrop-filter: blur(10px);
+
+  cursor: pointer;
+  pointer-events: auto;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.agro-window__control:hover {
+  transform: scale(1.08);
+
+  background: rgba(0, 0, 0, 0.48);
+
+  border-color: rgba(255, 255, 255, 0.75);
 }
