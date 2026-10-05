@@ -11,6 +11,7 @@
   <body>
     <section class="agro-hero">
       <div class="agro-hero__background"></div>
+      <div class="agro-hero__background agro-hero__background--next"></div>
       <div class="agro-hero__overlay"></div>
       <div class="agro-hero__rings"></div>
 
@@ -42,45 +43,53 @@
           </p>
         </div>
 
-        <div class="agro-window">
-          <div class="agro-window__media">
-            <div class="agro-window__video">
-              <video
-                autoplay
-                muted
-                loop
-                playsinline
-                poster="https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png"
-              >
-                <source src="" type="video/webm" />
-                <source src="" type="video/mp4" />
-              </video>
+        <div class="agro-window-shell">
+          <div class="agro-window">
+            <div class="agro-window__media">
+              <div class="agro-window__video">
+                <video
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  poster="https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png"
+                >
+                  <source src="" type="video/webm" />
+                  <source src="" type="video/mp4" />
+                </video>
+              </div>
+            </div>
+
+            <div class="agro-window__shade"></div>
+
+            <div class="agro-window__caption">
+              <span>Territorio</span>
+              <strong>Conoce el campo desde otra perspectiva</strong>
             </div>
           </div>
 
-          <div class="agro-window__shade"></div>
+          <div class="agro-window__controls">
+            <button
+              class="agro-window__control agro-window__control--prev"
+              type="button"
+              aria-label="Anterior"
+            >
+              &lt;
+            </button>
 
-          <div class="agro-window__caption">
-            <span>Territorio</span>
-            <strong>Conoce el campo desde otra perspectiva</strong>
+            <button
+              class="agro-window__control agro-window__control--next"
+              type="button"
+              aria-label="Siguiente"
+            >
+              &gt;
+            </button>
           </div>
         </div>
-        <div class="agro-window__controls">
-          <button
-            class="agro-window__control agro-window__control--prev"
-            type="button"
-            aria-label="Anterior"
-          >
-            &lt;
-          </button>
-
-          <button
-            class="agro-window__control agro-window__control--next"
-            type="button"
-            aria-label="Siguiente"
-          >
-            &gt;
-          </button>
+        <div class="agro-window__counter">
+          <span class="agro-window__counter-current">01</span>
+          <span class="agro-window__counter-separator">/</span>
+          <span class="agro-window__counter-total">05</span>
         </div>
       </div>
     </section>

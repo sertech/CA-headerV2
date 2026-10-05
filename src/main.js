@@ -116,3 +116,226 @@ if (cursor && leftZone && rightZone) {
     leftZone.addEventListener("mouseleave", hideCursor);
     rightZone.addEventListener("mouseleave", hideCursor);
 }
+
+const slides = [
+    {
+        category: "Territorio",
+        title: "Conoce el campo desde otra perspectiva",
+
+        background:
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png",
+
+        poster:
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png",
+
+        webm: "",
+        mp4: "",
+    },
+
+    {
+        category: "Producción",
+        title: "Descubre lo que produce nuestro territorio",
+
+        background:
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/soyaField.png",
+
+        poster:
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/04/soya-zoom.jpg",
+
+        webm: "",
+        mp4: "",
+    },
+
+    {
+        category: "Personas",
+        title: "Las personas detrás del campo boliviano",
+        background: "",
+        poster: "",
+        webm: "",
+        mp4: "",
+    },
+
+    {
+        category: "Datos",
+        title: "Información que ayuda a comprender el presente",
+        background: "",
+        poster: "",
+        webm: "",
+        mp4: "",
+    },
+
+    {
+        category: "Futuro",
+        title: "Datos para construir el agro del mañana",
+        background: "",
+        poster: "",
+        webm: "",
+        mp4: "",
+    },
+];
+
+function preloadSlides() {
+    slides.forEach((slide) => {
+        if (slide.background) {
+            const backgroundImage = new Image();
+            backgroundImage.src = slide.background;
+        }
+
+        if (slide.poster) {
+            const posterImage = new Image();
+            posterImage.src = slide.poster;
+        }
+    });
+}
+
+preloadSlides();
+
+let currentSlide = 0;
+
+const windowVideo = document.querySelector(".agro-window__video video");
+const windowCategory = document.querySelector(".agro-window__caption span");
+const windowTitle = document.querySelector(".agro-window__caption strong");
+const heroBackground = document.querySelector(".agro-hero__background:not(.agro-hero__background--next)");
+const heroBackgroundNext = document.querySelector(".agro-hero__background--next");
+
+function renderSlide(index) {
+    const slide = slides[index];
+
+    if (!slide || !windowVideo || !windowCategory || !windowTitle) {
+        return;
+    }
+
+    if (counterCurrent) {
+        counterCurrent.textContent = String(index + 1).padStart(2, "0")
+    }
+
+    windowCategory.textContent = slide.category;
+    windowTitle.textContent = slide.title;
+
+    windowVideo.poster = slide.poster || "";
+
+    const sources = windowVideo.querySelectorAll("source");
+
+    if (sources[0]) {
+        sources[0].src = slide.webm || "";
+    }
+
+    if (sources[1]) {
+        sources[1].src = slide.mp4 || "";
+    }
+
+    windowVideo.load();
+}
+
+renderSlide(currentSlide);
+
+// button functionality 
+const prevButton = document.querySelector(".agro-window__control--prev")
+const nextButton = document.querySelector(".agro-window__control--next")
+
+if (prevButton && nextButton) {
+    prevButton.addEventListener("click", () => {
+        animateControl(prevButton, -1)
+        let newIndex = currentSlide - 1;
+        if (newIndex < 0) {
+            newIndex = slides.length - 1;
+        }
+        changeSlide(newIndex, -1);
+    })
+
+    nextButton.addEventListener("click", () => {
+        animateControl(nextButton, 1)
+        let newIndex = currentSlide + 1;
+        if (newIndex >= slides.length) {
+            newIndex = 0;
+        }
+        changeSlide(newIndex, 1)
+    })
+}
+
+// change slide with simple animation
+let isAnimating = false;
+
+function changeSlide(newIndex, direction = 1) {
+    if (isAnimating) return;
+    isAnimating = true;
+
+    const distance = 40 * direction;
+
+    changeBackground(slides[newIndex].background);
+
+    gsap.to(".agro-window__video, .agro-window__caption", {
+        opacity: 0,
+        x: -distance,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => {
+            currentSlide = newIndex;
+            renderSlide(currentSlide);
+
+            gsap.set(".agro-window__video, .agro-window__caption", {
+                x: distance,
+            })
+
+            gsap.to(".agro-window__video, .agro-window__caption", {
+                opacity: 1,
+                x: 0,
+                duration: 0.45,
+                ease: "power3.out",
+                onComplete: () => { isAnimating = false }
+            })
+        }
+    })
+}
+
+function changeBackground(imgUrl) {
+    if (!imgUrl || !heroBackground || !heroBackgroundNext) {
+        return
+    }
+
+    heroBackgroundNext.style.backgroundImage = `url("${imgUrl}")`;
+
+    gsap.set(heroBackgroundNext, {
+        opacity: 0,
+        scale: 1.06,
+    })
+
+    gsap.to(heroBackgroundNext, {
+        opacity: 1,
+        scale: 1.03,
+        duration: 1.1,
+        ease: "power2.out",
+        onComplete: () => {
+            heroBackground.style.backgroundImage = `url("${imgUrl}")`;
+            gsap.set(heroBackgroundNext, {
+                opacity: 0,
+                scale: 1.03,
+            })
+        }
+    })
+}
+
+function animateControl(button, direction = 1) {
+    gsap.fromTo(
+        button,
+        {
+            scale: 1,
+            x: 0,
+        },
+        {
+            scale: 0.92,
+            x: 6 * direction,
+            duration: 0.12,
+            ease: "power2.in",
+            yoyo: true,
+            repeat: 1,
+        }
+    );
+}
+
+// slides counter
+const counterCurrent = document.querySelector(".agro-window__counter-current")
+const counterTotal = document.querySelector(".agro-window__counter-total")
+if (counterTotal) {
+    counterTotal.textContent = String(slides.length).padStart(2, "0")
+}
