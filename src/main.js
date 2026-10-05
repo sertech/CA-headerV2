@@ -197,6 +197,8 @@ const windowCategory = document.querySelector(".agro-window__caption span");
 const windowTitle = document.querySelector(".agro-window__caption strong");
 const heroBackground = document.querySelector(".agro-hero__background:not(.agro-hero__background--next)");
 const heroBackgroundNext = document.querySelector(".agro-hero__background--next");
+const counterCurrent = document.querySelector(".agro-window__counter-current")
+const counterTotal = document.querySelector(".agro-window__counter-total")
 
 function renderSlide(index) {
     const slide = slides[index];
@@ -264,22 +266,43 @@ function changeSlide(newIndex, direction = 1) {
 
     changeBackground(slides[newIndex].background);
 
+    gsap.to(counterCurrent, {
+        opacity: 0,
+        y: -6,
+        duration: 0.18,
+        ease: "power2.in"
+    })
+
     gsap.to(".agro-window__video, .agro-window__caption", {
         opacity: 0,
         x: -distance,
+        scale: 0.97,
         duration: 0.3,
         ease: "power2.in",
         onComplete: () => {
+            gsap.set(counterCurrent, {
+                y: 6
+            })
+
+            gsap.to(counterCurrent, {
+                opacity: 1,
+                y: 0,
+                duration: 0.28,
+                ease: "power2.out"
+            })
+
             currentSlide = newIndex;
             renderSlide(currentSlide);
 
             gsap.set(".agro-window__video, .agro-window__caption", {
                 x: distance,
+                scale: 1.03
             })
 
             gsap.to(".agro-window__video, .agro-window__caption", {
                 opacity: 1,
                 x: 0,
+                scale: 1,
                 duration: 0.45,
                 ease: "power3.out",
                 onComplete: () => { isAnimating = false }
@@ -334,8 +357,40 @@ function animateControl(button, direction = 1) {
 }
 
 // slides counter
-const counterCurrent = document.querySelector(".agro-window__counter-current")
-const counterTotal = document.querySelector(".agro-window__counter-total")
 if (counterTotal) {
     counterTotal.textContent = String(slides.length).padStart(2, "0")
 }
+
+// intro animation
+function introAnimation() {
+    const timeline = gsap.timeline({
+        defaults: {
+            ease: "power3.out"
+        }
+    })
+
+    timeline
+        .from(".agro-hero__topics", {
+            opacity: 0,
+            y: -10,
+            duration: 0.5
+        }).
+        from(".agro-hero__title-line--main", {
+            opacity: 0,
+            y: 25,
+            duration: 0.6
+        }, "-=0.25")
+        .from(".agro-hero__title-line--secondary", {
+            opacity: 0,
+            y: 12,
+            duration: 0.5,
+        }, "-=0.3")
+        .from(".agro-window-shell", {
+            opacity: 0,
+            y: 35,
+            scale: 0.97,
+            duration: 0.9
+        }, "-=0.35")
+}
+
+introAnimation()

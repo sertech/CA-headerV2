@@ -168,14 +168,8 @@ body {
 }
 
 .agro-hero__title-line--secondary strong {
-  background: #FFF;
-  background: linear-gradient(137deg, rgba(255, 255, 255, 1) 0%, rgba(58, 170, 53, 1) 88%, rgba(6, 126, 58, 1) 100%);
-
-  background-clip: text;
-  -webkit-background-clip: text;
-
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  background: transparent;
+  color: #3AAA35;
 
   font-weight: 700;
   letter-spacing: -0.045em;
