@@ -121,7 +121,7 @@ const slides = [
     {
         category: "Territorio",
         title: "Conoce el campo desde otra perspectiva",
-
+        heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
         background:
             "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png",
 
@@ -135,7 +135,7 @@ const slides = [
     {
         category: "Producción",
         title: "Descubre lo que produce nuestro territorio",
-
+        heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
         background:
             "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/soyaField.png",
 
@@ -197,11 +197,26 @@ const windowCategory = document.querySelector(".agro-window__caption span");
 const windowTitle = document.querySelector(".agro-window__caption strong");
 const heroBackground = document.querySelector(".agro-hero__background:not(.agro-hero__background--next)");
 const heroBackgroundNext = document.querySelector(".agro-hero__background--next");
-const counterCurrent = document.querySelector(".agro-window__counter-current")
-const counterTotal = document.querySelector(".agro-window__counter-total")
+const counterCurrent = document.querySelector(".agro-window__counter-current");
+const counterTotal = document.querySelector(".agro-window__counter-total");
+const topicItems = document.querySelectorAll(".agro-hero__topics span");
+const heroSubtitle = document.querySelector(".agro-hero__subtitle");
+
+
+if (heroBackground && slides[currentSlide].background) {
+    heroBackground.style.backgroundImage =
+        `url("${slides[currentSlide].background}")`;
+}
+
+function updateActiveTopic(index) {
+    topicItems.forEach((item, itemIndex) => {
+        item.classList.toggle("is-active", itemIndex === index)
+    })
+}
 
 function renderSlide(index) {
     const slide = slides[index];
+    updateActiveTopic(index);
 
     if (!slide || !windowVideo || !windowCategory || !windowTitle) {
         return;
@@ -209,6 +224,10 @@ function renderSlide(index) {
 
     if (counterCurrent) {
         counterCurrent.textContent = String(index + 1).padStart(2, "0")
+    }
+
+    if (heroSubtitle && slide.heroSubtitle) {
+        heroSubtitle.textContent = slide.heroSubtitle;
     }
 
     windowCategory.textContent = slide.category;

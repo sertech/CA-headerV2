@@ -405,3 +405,17 @@ body {
 .agro-window__counter-current {
   color: #fff;
 }
+
+/* upper part topics styling active effect */
+.agro-hero__topics span {
+  transition: color 0.35s ease, opacity 0.35s ease;
+}
+
+.agro-hero__topics span.is-active {
+  color: #FFFFFF;
+  opacity: 1;
+}
+
+.agro-hero__topics {
+  color: rgba(255, 255, 255, 0.5);
+}
