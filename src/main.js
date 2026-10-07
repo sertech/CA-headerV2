@@ -119,56 +119,59 @@ if (cursor && leftZone && rightZone) {
 
 const slides = [
     {
-        category: "Territorio",
+        category: "entrevista",
         title: "Conoce el campo desde otra perspectiva",
         heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
         background:
-            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png",
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/fotografia-empadronador-horizontal.png",
 
         poster:
-            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/C1v2.png",
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/fotografia-empadronador-horizontal.png",
 
         webm: "",
         mp4: "",
     },
 
     {
-        category: "Producción",
+        category: "vacas",
         title: "Descubre lo que produce nuestro territorio",
         heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
         background:
-            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/soyaField.png",
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/02/vacas.png",
 
         poster:
-            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/04/soya-zoom.jpg",
+            "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/04/cow-zoom.jpg",
 
         webm: "",
         mp4: "",
     },
 
     {
-        category: "Personas",
+        category: "maquina_cosecha",
         title: "Las personas detrás del campo boliviano",
-        background: "",
-        poster: "",
+        heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
+        background: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/02/tractor.png",
+        poster: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/04/soya-zoom.jpg",
         webm: "",
         mp4: "",
     },
 
     {
-        category: "Datos",
+        category: "cacao",
         title: "Información que ayuda a comprender el presente",
-        background: "",
-        poster: "",
+        heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
+        background: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/02/uvas.png",
+        poster: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/04/coffe-zoom.png",
         webm: "",
         mp4: "",
     },
 
     {
-        category: "Futuro",
+        category: "empleados",
         title: "Datos para construir el agro del mañana",
-        background: "",
-        poster: "",
+        heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
+        background: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/landing-page-principal.png",
+        poster: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/09/image.jpeg",
         webm: "",
         mp4: "",
     },
@@ -285,6 +288,13 @@ function changeSlide(newIndex, direction = 1) {
 
     changeBackground(slides[newIndex].background);
 
+    gsap.to(heroSubtitle, {
+        opacity: 0,
+        y: -8,
+        duration: 0.2,
+        ease: "power2.in"
+    })
+
     gsap.to(counterCurrent, {
         opacity: 0,
         y: -6,
@@ -312,6 +322,17 @@ function changeSlide(newIndex, direction = 1) {
 
             currentSlide = newIndex;
             renderSlide(currentSlide);
+
+            gsap.set(heroSubtitle, {
+                y: 8
+            })
+
+            gsap.to(heroSubtitle, {
+                opacity: 1,
+                y: 0,
+                duration: 0.35,
+                ease: "power2.out"
+            })
 
             gsap.set(".agro-window__video, .agro-window__caption", {
                 x: distance,
