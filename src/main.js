@@ -163,7 +163,7 @@ const slides = [
         background: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/02/uvas.png",
         poster: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/10/Postman-Butterfly-on-a-Red-Cacao-Pod.png",
         webm: "",
-        mp4: "",
+        mp4: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/10/PixVerse_V6_Fusion_540P_animate_a_cacao_pod_so.mp4",
     },
 
     {
