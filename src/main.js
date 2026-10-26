@@ -161,7 +161,7 @@ const slides = [
         title: "Información que ayuda a comprender el presente",
         heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
         background: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/02/uvas.png",
-        poster: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/04/coffe-zoom.png",
+        poster: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/10/Postman-Butterfly-on-a-Red-Cacao-Pod.png",
         webm: "",
         mp4: "",
     },
