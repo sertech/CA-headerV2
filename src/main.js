@@ -24,7 +24,7 @@ agroWindow.addEventListener("mousemove", (event) => {
     const normalizedX = mouseX / rect.width - 0.5;
     const normalizedY = mouseY / rect.height - 0.5;
 
-    const maxRotation = 4;
+    const maxRotation = 3;
 
     const rotateY = normalizedX * maxRotation * 2;
     const rotateX = normalizedY * -maxRotation * 2;
@@ -33,9 +33,11 @@ agroWindow.addEventListener("mousemove", (event) => {
     rotateYTo(rotateY);
 
     // parallax effect
-    const maxParallax = 18;
-    const videoX = normalizedX * -maxParallax * 4;
-    const videoY = normalizedY * -maxParallax * 4;
+    const maxParallaxX = 55;
+    const maxParallaxY = 35;
+
+    const videoX = normalizedX * -maxParallaxX * 2;
+    const videoY = normalizedY * -maxParallaxY * 2;
 
     videoXTo(videoX);
     videoYTo(videoY);
@@ -161,7 +163,7 @@ const slides = [
         title: "Información que ayuda a comprender el presente",
         heroSubtitle: "Conocemos cómo se produce hoy para entender el agro del mañana",
         background: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/02/uvas.png",
-        poster: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/10/Postman-Butterfly-on-a-Red-Cacao-Pod.png",
+        poster: "",
         webm: "",
         mp4: "https://censoagropecuario.ine.gob.bo/wp-content/uploads/2026/10/PixVerse_V6_Fusion_540P_animate_a_cacao_pod_so.mp4",
     },
@@ -188,6 +190,18 @@ function preloadSlides() {
             const posterImage = new Image();
             posterImage.src = slide.poster;
         }
+
+        if (slide.mp4) {
+            const video = document.createElement("video");
+            video.preload = "metadata";
+            video.src = slide.mp4;
+        }
+
+        if (slide.webm) {
+            const video = document.createElement("video");
+            video.preload = "metadata";
+            video.src = slide.webm;
+        }
     });
 }
 
@@ -204,6 +218,22 @@ const counterCurrent = document.querySelector(".agro-window__counter-current");
 const counterTotal = document.querySelector(".agro-window__counter-total");
 const topicItems = document.querySelectorAll(".agro-hero__topics span");
 const heroSubtitle = document.querySelector(".agro-hero__subtitle");
+
+agroWindow.addEventListener("mouseenter", () => {
+    if (!windowVideo) return
+    const hasVideo = windowVideo.querySelector('source[src]:not([src=""])');
+
+    if (hasVideo) {
+        windowVideo.play().catch(() => { });
+    }
+})
+
+agroWindow.addEventListener("mouseleave", () => {
+    if (!windowVideo) return;
+
+    windowVideo.pause();
+    windowVideo.currentTime = 0;
+})
 
 
 if (heroBackground && slides[currentSlide].background) {
