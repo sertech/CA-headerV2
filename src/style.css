@@ -308,12 +308,6 @@ body {
   font-weight: 700;
 }
 
-.agro-window__media {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
 .agro-window__video {
   position: absolute;
   inset: 0;
